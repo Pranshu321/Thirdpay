@@ -12,7 +12,7 @@ export default function Home() {
 		<div className={styles.container}>
 			<Head>
 				<title>Thirdpay | Decentralised Payments Made Easy</title>
-				<link rel="shortcut icon" href="https://asset.brandfetch.io/ide4xlGdEo/idu3xd7T_Q.jpeg" type="image/x-icon" />
+				<link rel="shortcut icon" href="https://tailwindui.com/img/logos/mark.svg?color=pink&shade=600" type="image/x-icon" />
 			</Head>
 			<Appstate.Provider value={{ login, setlogin }}>
 				{!login ? (

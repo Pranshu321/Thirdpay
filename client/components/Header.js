@@ -36,15 +36,22 @@ const Header = () => {
 				<div className="mx-auto max-w-7xl px-6">
 					<div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
 						<div className="hidden lg:flex justify-start lg:w-0 lg:flex-1">
-							<a href="#">
+							<a href="#" className="flex gap-x-2">
 								<img
 									className="h-8 w-auto sm:h-10"
-									src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+									src="https://tailwindui.com/img/logos/mark.svg?color=pink&shade=600"
 									alt=""
 								/>
+								<button
+									type="button"
+									className="text-[#fff] group inline-flex items-center rounded-md text-2xl font-medium"
+									aria-expanded="false"
+								>
+									<span>Thirdpay</span>
+								</button>
 							</a>
 						</div>
-						<nav className="space-x-10 md:flex">
+						<nav className="lg:hidden space-x-10 md:flex">
 							<div className="relative">
 								<button
 									type="button"
