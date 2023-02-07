@@ -28,7 +28,7 @@ const RecentTx = () => {
           </div>
         </div>
         <a target={'_blank'} href={`${"fd"}/tx/${"fdg"}`}>
-          <div className="font-mono w-full py-4 rounded-b-lg bg-gray-900 text-center cursor-pointer text-opacity-30">
+          <div className="font-mono w-full py-4 hover:text-[#DD13A4] rounded-b-lg bg-gray-900 text-center cursor-pointer text-opacity-30">
             View Transaction
           </div>
         </a>
