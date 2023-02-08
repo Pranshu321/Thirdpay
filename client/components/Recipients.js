@@ -133,7 +133,7 @@ const Recipients = () => {
 			<input
 				onChange={(e) => setRecipientName(e.target.value)}
 				value={recipientName}
-				onClick={trans}
+				// onClick={trans}
 				className="mt-4 w-3/4 p-3 bg-black border-2 border-blue-900 border-opacity-60 bg-opacity-70 outline-none rounded-lg"
 				placeholder="Paste Recipient Name"
 			/>
@@ -152,7 +152,7 @@ const Recipients = () => {
 				{data.map((e, idx) => {
 					return (
 						<div
-							onClick={() => {}}
+							onClick={() => {App.settransfer_to(e.recipient)}}
 							key={idx + 1}
 							className={`bg-black cursor-pointer rounded-lg bg-opacity-60 border-2 border-blue-900 border-opacity-80 w-3/4 mt-2`}
 						>

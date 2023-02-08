@@ -21,7 +21,7 @@ const Send = () => {
 	const add = useAddress();
 
 	const chain = useChainId();
-	const [transfer_to, settransfer_to] = useState("");
+	// const [transfer_to, settransfer_to] = useState("");
 	const [amount_to, setamount] = useState("");
 	// const { contract, isLoading, data } = useContract(tokenadress);
 	const ERCABI = [
@@ -94,9 +94,13 @@ const Send = () => {
 		// 	console.error("contract call failure", err);
 		// }
 		try {
-			const data = await _transfer([transfer_to, CHAIN_ID_TO_NAME[chain]]);
+			const data = await _transfer([
+				App.transfer_to,
+				CHAIN_ID_TO_NAME[chain],
+				{ value: ethers.utils.parseEther(amount_to) }
+			]);
 			console.info("contract call successs", data);
-			settransfer_to("");
+			App.settransfer_to("");
 			setamount("");
 			toast.success("Amount Transferred");
 		} catch (err) {
@@ -217,9 +221,9 @@ const Send = () => {
 			<div className="flex w-4/5 justify-between items-center mt-5">
 				<input
 					onChange={(e) => {
-						settransfer_to(e.target.value);
+						App.settransfer_to(e.target.value);
 					}}
-					// value={App.recipientAddress}
+					value={App.transfer_to}
 					className="w-3/4 p-3 bg-black border-2 border-blue-900 border-opacity-60 bg-opacity-70 outline-none rounded-lg"
 					placeholder="Paste Recipient Address"
 				/>
