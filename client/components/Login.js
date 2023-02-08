@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Appstate } from "../pages";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
+import { toast, Toaster } from "react-hot-toast";
 const Login = () => {
 	const navi = useRouter();
 	const sdk = useSDK();
@@ -21,10 +22,12 @@ const Login = () => {
 			if (add) {
 				App.setlogin(true);
 			} else {
+				// toast.error("Wallet Not Connected");
 				App.setlogin(false);
 			}
 		} catch (err) {
-			console.log(err);
+			console.log(err.message);
+			toast.error("Wallet Not Connected");
 		}
 	};
 
@@ -34,6 +37,31 @@ const Login = () => {
 
 	return (
 		<main className={styles.main}>
+			<Toaster
+				position="top-center"
+				reverseOrder={false}
+				gutter={8}
+				containerClassName=""
+				containerStyle={{}}
+				toastOptions={{
+					// Define default options
+					className: "",
+					duration: 5000,
+					style: {
+						background: "#363636",
+						color: "#fff",
+					},
+
+					// Default options for specific types
+					success: {
+						duration: 3000,
+						theme: {
+							primary: "green",
+							secondary: "black",
+						},
+					},
+				}}
+			/>
 			<h1 className={styles.title}>
 				Welcome to <a href="#">ThirdPay!</a>
 			</h1>
