@@ -11,7 +11,8 @@ import {
 	useContractWrite,
 } from "@thirdweb-dev/react";
 import { useAccount } from "wagmi";
-import { CHAIN_ID_TO_NAME, CHAIN_NAME_TO_ID } from "@thirdweb-dev/sdk";
+import { CHAIN_ID_TO_NAME } from "@thirdweb-dev/sdk";
+import { Toaster, toast } from "react-hot-toast";
 
 const Send = () => {
 	const App = useContext(Appstate);
@@ -93,15 +94,43 @@ const Send = () => {
 		// 	console.error("contract call failure", err);
 		// }
 		try {
-			const data = await _transfer([ transfer_to , "ETH" ]);
+			const data = await _transfer([transfer_to, CHAIN_ID_TO_NAME[chain]]);
 			console.info("contract call successs", data);
-		  } catch (err) {
+			settransfer_to("");
+			setamount("");
+			toast.success("Amount Transferred");
+		} catch (err) {
 			console.error("contract call failure", err);
-		  }
+		}
 	};
 
 	return (
 		<div className="flex flex-col justify-center items-center text-white">
+			<Toaster
+				position="top-center"
+				reverseOrder={false}
+				gutter={8}
+				containerClassName=""
+				containerStyle={{}}
+				toastOptions={{
+					// Define default options
+					className: "",
+					duration: 5000,
+					style: {
+						background: "#363636",
+						color: "#fff",
+					},
+
+					// Default options for specific types
+					success: {
+						duration: 3000,
+						theme: {
+							primary: "green",
+							secondary: "black",
+						},
+					},
+				}}
+			/>
 			{/* Balance */}
 			<div className="flex w-4/5 justify-around items-center mt-7">
 				<div
@@ -220,46 +249,46 @@ const Send = () => {
 			)}
 
 			{/* Recent Tx section */}
-			<div
-				className={` bg-black rounded-lg bg-opacity-60 border-2 border-blue-900 border-opacity-80 w-4/5 mt-2`}
-			>
-				<div className="flex w-full items-center justify-center rounded-t-lg">
-					<div className="w-4/6 py-2 px-2">
-						<p className="text-xl font-mono">
-							Amount: {234} {"ETH"}
-						</p>
-						<p className="text-xs font-mono">to: {"sdsd"}</p>
-					</div>
-					{App.saveTxLoad ? (
-						<div className="flex justify-center bg-green-500 font-medium font-mono bg-opacity-80 h-full w-1/6 py-1 mr-2 rounded-md">
-							<TailSpin height={18} width={18} color={"white"} />
-						</div>
-					) : (
-						<button
-							onClick={() => {}}
-							className="bg-green-500 font-medium font-mono bg-opacity-80 h-full w-1/6 py-1 mr-2 rounded-md"
-						>
-							Save
-						</button>
-					)}
-					<button
-						onClick={() => {}}
-						className="bg-red-700 font-medium font-mono bg-opacity-80 h-full w-1/6 py-1 mr-2 rounded-md"
-					>
-						Ignore
-					</button>
-				</div>
-				{/* <a target={'_blank'} href={`${App.explorer}/tx/${App.recentTx.txhash}`}>
-          <div className="font-mono w-full rounded-b-lg bg-gray-900 text-center cursor-pointer text-opacity-30">
-            View Transaction
-          </div>
-        </a> */}
-			</div>
 
 			{/* Error & Message */}
 			{/* <p className="text-red-600 text-lg mt-2 px-3">{App.error}</p>
       <p className="text-green-600 text-lg mt-2 px-1">{App.message}</p> */}
 		</div>
+		// 	{/* <div
+		// 		className={` bg-black rounded-lg bg-opacity-60 border-2 border-blue-900 border-opacity-80 w-4/5 mt-2`}
+		// 	>
+		// 		<div className="flex w-full items-center justify-center rounded-t-lg">
+		// 			<div className="w-4/6 py-2 px-2">
+		// 				<p className="text-xl font-mono">
+		// 					Amount: {234} {"ETH"}
+		// 				</p>
+		// 				<p className="text-xs font-mono">to: {"sdsd"}</p>
+		// 			</div>
+		// 			{App.saveTxLoad ? (
+		// 				<div className="flex justify-center bg-green-500 font-medium font-mono bg-opacity-80 h-full w-1/6 py-1 mr-2 rounded-md">
+		// 					<TailSpin height={18} width={18} color={"white"} />
+		// 				</div>
+		// 			) : (
+		// 				<button
+		// 					onClick={() => {}}
+		// 					className="bg-green-500 font-medium font-mono bg-opacity-80 h-full w-1/6 py-1 mr-2 rounded-md"
+		// 				>
+		// 					Save
+		// 				</button>
+		// 			)}
+		// 			<button
+		// 				onClick={() => {}}
+		// 				className="bg-red-700 font-medium font-mono bg-opacity-80 h-full w-1/6 py-1 mr-2 rounded-md"
+		// 			>
+		// 				Ignore
+		// 			</button>
+		// 		</div>
+		// 		{/* <a target={'_blank'} href={`${App.explorer}/tx/${App.recentTx.txhash}`}>
+		//   <div className="font-mono w-full rounded-b-lg bg-gray-900 text-center cursor-pointer text-opacity-30">
+		//     View Transaction
+		//   </div>
+		// </a> */}
+		// 	</div> */}
 	);
 };
 
